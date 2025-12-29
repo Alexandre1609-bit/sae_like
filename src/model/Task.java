@@ -2,22 +2,25 @@ package model;
 import java.time.LocalDate;
 import java.util.Date;
 
-
 public class Task {
     private String title;
     private Integer taskId;
     private boolean taskStatus;
-    private LocalDate startDate;
+    private java.time.LocalDate startDate;
     private String description;
-    private User accountant;
+    private User accountantId;
 
-    public Task(String title, Integer taskId, boolean taskStatus, LocalDate startDate, User accountant) {
+    public Task(String title, Integer taskId, boolean taskStatus, java.time.LocalDate startDate, User accountantId) {
         this.title = title;
         this.taskId = taskId;
         this.taskStatus = taskStatus;
         this.startDate = startDate;
-        this.accountant = accountant;
+        this.accountantId = accountantId;
         this.description = null;
+
+
+    }
+    public Task() {
     }
 
     public String getTitle() {
@@ -37,11 +40,11 @@ public class Task {
     }
 
     public User getAccountant() {
-        return accountant;
+        return accountantId;
     }
 
     public void setAccountant(User accountant) {
-        this.accountant = accountant;
+        this.accountantId = accountant;
     }
 
     public String getDescription() {
