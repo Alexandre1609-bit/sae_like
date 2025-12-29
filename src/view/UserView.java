@@ -8,12 +8,8 @@ import java.util.Scanner;
 public class UserView {
 
     private Scanner scanner = new Scanner(System.in);
-    private final UserRepository userRepository;
-    private final AllController allController;
 
-    public UserView (UserRepository userRepository, AllController allController) {
-        this.userRepository = userRepository;
-        this.allController = allController;
+    public UserView () {
     }
 
     public int startMenue() {
