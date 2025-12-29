@@ -31,7 +31,6 @@ public class UserRepository {
 
             try(PreparedStatement pStatement = con.prepareStatement(sql)) {
                 pStatement.executeUpdate();
-                System.out.println("### User table created with success###");
 
                 pStatement.close();
                 con.close();
@@ -56,7 +55,6 @@ public class UserRepository {
                 pStatement.setString(2, userToAdd.getName());
 
                 pStatement.executeUpdate();
-                System.out.println("### User added ###");
 
                 pStatement.close();
                 con.close();
@@ -94,7 +92,32 @@ public class UserRepository {
         }
         return users;
     }
+    public User getUserByName (String Usrname) {
+        User user = null;
+        try {
+            Connection con = dataSource.getConnection();
+            String sql = """
+                    SELECT 
+                    name
+                    FROM user
+                    WHERE name = ?""";
 
+            try(PreparedStatement pStatement = con.prepareStatement(sql)) {
+                pStatement.setString(1, Usrname);
+                ResultSet rs = pStatement.getResultSet();
+
+                while (rs.next()) {
+                    String name = rs.getString("name");
+
+                    user.setName(name);
+                }
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
     public User getUserById (Integer id) {
         User user = null;
         try {
@@ -138,7 +161,6 @@ public class UserRepository {
                 pStatement.setString(1, newName);
                 pStatement.setInt(2, id);
                 pStatement.executeUpdate();
-                System.out.println("### User updated ###");
 
                 pStatement.close();
                 con.close();
@@ -159,7 +181,6 @@ public class UserRepository {
             try(PreparedStatement pStatement = con.prepareStatement(sql)) {
                 pStatement.setInt(1, id);
                 pStatement.executeUpdate();
-                System.out.println("### User deleted ###");
 
                 pStatement.close();
             }
